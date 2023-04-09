@@ -1,0 +1,69 @@
+{%extends "unlogged/base.html.twig"%}
+
+{% block title %}
+submit.
+{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('index') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('index') }}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="nav">
+        <a href="{{path('app_login')}}">log in</a>
+    </div>
+    <div class="head">
+        <div class="column">
+                <img src="https://products.ls.graphics/simplemockups/images/laptop.png">
+        </div>
+        <div class="column">
+            <div class="quote">
+                <h1>just submit.</h1>
+            </div>
+            <div class="subquote">
+                <h2>why don't you just <a href="{{path('app_login')}}">join us</a>?</h2>
+            </div>
+        </div>
+    </div> 
+    <div class="head-bottom">
+    </div>
+    <div class="section white">
+        <div class="column">
+            <p>Submit is a community where people communicate with each other all around the world. It was created to show, that PHP is great (again). Project is 100% open-source and even though, no one is about to use it.</p>
+        </div>
+        <div class="column">
+            <img src="https://www.oakyweb.com/images/service-single.gif">
+        </div>
+    </div>
+    <div class="section-bottom">
+    </div>
+    <div class="section violet">
+        <div class="column">
+            <img src="https://cdn.pixabay.com/animation/2022/11/03/14/36/14-36-22-714_512.gif">
+        </div>
+        <div class="column">
+            <h1>Any questions?</h1>
+            <p>Feel free to push issues to <a href="">repository</a>. Doing this, helps development and making Submit convenient place for everyone</p>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="footer-section">
+            <img src="">
+            <a href="">Github</a>
+        </div>
+        <div class="footer-section">
+            designed by Yanushevitz
+        </div>
+        <div class="footer-section">
+            All rights reserved
+        </div>
+    </div>
+
+</div>
+
+{%endblock%}
