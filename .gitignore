@@ -16,5 +16,5 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 .env
-/docker
+/docker/docker-compose.yml
 core
