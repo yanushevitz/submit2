@@ -17,7 +17,7 @@ async function fetchPosts() {
   // image.setAttribute("src", "https://sezeromer.com/wp-content/uploads/2019/09/Infinity-1s-200px.gif")
   // loading.append(image)
   // document.querySelector(".container").append(loading)
-  let posty = await fetch("http://judasz.ddns.net:8000/async/posts").then(response => response.json())
+  let posty = await fetch("http://127.0.0.1/async/posts").then(response => response.json())
   posty.forEach(function (a) {
     let post = document.createElement('div')
     let text = document.createElement('div')
@@ -32,7 +32,7 @@ async function fetchPosts() {
     comments.setAttribute('class', 'comments')
 
     text.innerText = a.text
-    image.innerHTML = "<img src='http://judasz.ddns.net:8000/images/" + a.image + "'>"
+    image.innerHTML = "<img src='http://127.0.0.1/images/" + a.image + "'>"
     menu.innerHTML = "<div class='post-menu'><span class='reactions'>reactions: " + a.reactions + "</span><a href=''>add comment</a><a href=''>report</a><a href=''>follow thread</a></div>"
 
     a.comments.forEach(function (a) {
@@ -100,6 +100,9 @@ function createPost(){
   // form.addEventListener("")
 }
 
+function redirectToPost(id){
+  window.location.href = "/post/"+id;
+}
 async function sendPost(formData){
   let text = formData.querySelector("textarea")
   let file = formData.querySelector("input")
@@ -109,8 +112,11 @@ async function sendPost(formData){
       text: text.value,
       file: file.value
     })
-  })
-  
+  }).then((response)=>{return response.json()})
+  if(post.status === "created"){
+    redirectToPost(post.id)
+    // console.log(post.id);
+  }
 
 }
 

@@ -36,8 +36,12 @@ class LoggedController extends AbstractController
         // die();
         // header('Location: '.$this->auth0->logout("http://judasz.ddns.net:8000"));
         // exit;
-        return $this->redirect($this->auth0->logout("http://judasz.ddns.net:8000"));
+        return $this->redirect($this->auth0->logout("http://127.0.0.1"));
     }
 
+    #[Route("/post/{id}", name: "app_post")]
+    public function post($id){
+        return $this->render("logged/post.html.twig");
+    }
 
 }

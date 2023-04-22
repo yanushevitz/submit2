@@ -16,4 +16,9 @@ RUN mv composer.phar /usr/local/bin/composer
 RUN apt update
 
 RUN apt install npm -y
+
+RUN npm install -g n
+RUN n latest
 RUN npm install
+RUN npm update
+RUN npm run build

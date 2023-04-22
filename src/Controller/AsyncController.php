@@ -40,12 +40,14 @@ class AsyncController extends AbstractController
     public function index(): Response
     {
         $posts = $this->entityManager->getRepository(Post::class)->findAll();
+        $posts = array_reverse($posts);
         $defaultContext = [ 
             AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function($object){
                 return $object->getName();            
             }
             ];
         $json = $this->serializer->serialize($posts, 'json', ['groups' => ['user', 'comment']]);
+        // array
         $response = new JsonResponse();
         $response->setContent($json);
         $response->headers->set('Access-Control-Allow-Origin', "*");
@@ -54,15 +56,8 @@ class AsyncController extends AbstractController
     #[Route("/async/post", name: "async_post")]
     public function createPost(Request $request){
         // var_dump($request->getContent());
-        $status = $this->postService->create($request->getContent());
-        if($status){
-            return new JsonResponse(['status' => 'created']);
-            
-        }
-        else{
-            return new JsonResponse(['status' => 'error']);
-
-        }
+        $post = $this->postService->create($request->getContent());
+            return new JsonResponse(['status' => 'created', "id" => $post]);
         // var_dump($request->getContent());
     }
 
