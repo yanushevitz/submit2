@@ -18,3 +18,4 @@ yarn-error.log
 .env
 /docker/docker-compose.yml
 core
+/public/uploads/*
