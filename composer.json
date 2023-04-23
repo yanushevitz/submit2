@@ -15,6 +15,7 @@
         "guzzlehttp/guzzle": "^7.5",
         "guzzlehttp/psr7": "^2.4",
         "http-interop/http-factory-guzzle": "^1.2",
+        "ramsey/uuid": "^4.7",
         "symfony/console": "6.2.*",
         "symfony/dependency-injection": "6.2.*",
         "symfony/dotenv": "6.2.*",

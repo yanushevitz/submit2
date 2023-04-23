@@ -12,11 +12,6 @@ function shrinkComments() {
 
 
 async function fetchPosts() {
-  // let loading = document.createElement('div')
-  // let image = document.createElement("img")
-  // image.setAttribute("src", "https://sezeromer.com/wp-content/uploads/2019/09/Infinity-1s-200px.gif")
-  // loading.append(image)
-  // document.querySelector(".container").append(loading)
   let posty = await fetch("http://127.0.0.1/async/posts").then(response => response.json())
   posty.forEach(function (a) {
     let post = document.createElement('div')
@@ -32,7 +27,7 @@ async function fetchPosts() {
     comments.setAttribute('class', 'comments')
 
     text.innerText = a.text
-    image.innerHTML = "<img src='http://127.0.0.1/images/" + a.image + "'>"
+    image.innerHTML = "<img src='http://127.0.0.1/uploads/" + a.image + "'>"
     menu.innerHTML = "<div class='post-menu'><span class='reactions'>reactions: " + a.reactions + "</span><a href=''>add comment</a><a href=''>report</a><a href=''>follow thread</a></div>"
 
     a.comments.forEach(function (a) {
@@ -59,7 +54,6 @@ async function fetchPosts() {
     post.append(image)
     post.append(menu)
     post.append(comments)
-    // document.querySelector('.container').remove(image)
     document.querySelector(".container").append(post)
   })
 }
@@ -106,16 +100,17 @@ function redirectToPost(id){
 async function sendPost(formData){
   let text = formData.querySelector("textarea")
   let file = formData.querySelector("input")
+  let form = new FormData()
+  let postText = text.value
+  form.append("file", file.files[0])
+  form.append("text", postText)
+
   let post = await fetch("async/post",{
     method: 'POST',
-    body: JSON.stringify({
-      text: text.value,
-      file: file.value
-    })
+    body: form
   }).then((response)=>{return response.json()})
   if(post.status === "created"){
     redirectToPost(post.id)
-    // console.log(post.id);
   }
 
 }

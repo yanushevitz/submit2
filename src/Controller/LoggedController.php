@@ -32,10 +32,6 @@ class LoggedController extends AbstractController
     }
     #[Route("/logout", name: "app_logout")]
     public function logout(){
-        // var_dump();
-        // die();
-        // header('Location: '.$this->auth0->logout("http://judasz.ddns.net:8000"));
-        // exit;
         return $this->redirect($this->auth0->logout("http://127.0.0.1"));
     }
 

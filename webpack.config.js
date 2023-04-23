@@ -23,6 +23,7 @@ Encore
     .addEntry('index', './assets/index.js')
     .addEntry('login', './assets/login.js')
     .addEntry('dashboard', './assets/dashboard.js')
+    .addEntry('post', './assets/post.js')
     .addEntry('profile', './assets/profile.js')
     .addEntry('base_unlogged', './assets/base_unlogged.js')
     .addEntry('base_logged', './assets/base_logged.js')

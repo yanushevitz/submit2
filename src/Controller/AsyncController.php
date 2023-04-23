@@ -36,7 +36,7 @@ class AsyncController extends AbstractController
         $this->serializer = new Serializer([new ObjectNormalizer(defaultContext: $defaultContext)], [new JsonEncoder]);
     }
 
-    #[Route('/async/posts', name: 'async_posts')]
+    #[Route('/async/posts', name: 'async_posts_fetch')]
     public function index(): Response
     {
         $posts = $this->entityManager->getRepository(Post::class)->findAll();
@@ -47,18 +47,22 @@ class AsyncController extends AbstractController
             }
             ];
         $json = $this->serializer->serialize($posts, 'json', ['groups' => ['user', 'comment']]);
-        // array
         $response = new JsonResponse();
         $response->setContent($json);
         $response->headers->set('Access-Control-Allow-Origin', "*");
         return $response;
     }
-    #[Route("/async/post", name: "async_post")]
+    #[Route("/async/post", name: "async_post_create")]
     public function createPost(Request $request){
-        // var_dump($request->getContent());
-        $post = $this->postService->create($request->getContent());
-            return new JsonResponse(['status' => 'created', "id" => $post]);
-        // var_dump($request->getContent());
+        $post = $this->postService->create($request);
+        return new JsonResponse(['status' => 'created', "id" => $post]);
+    }
+
+    #[Route("/async/post/{id}", name: "async_post_fetch")]
+    public function fetchPost($id){
+        $data = $this->postService->fetchById($id);
+        $jsonData = $this->serializer->normalize($data, 'json');
+        return new JsonResponse($jsonData);
     }
 
 }

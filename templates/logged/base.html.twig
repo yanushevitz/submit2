@@ -15,6 +15,20 @@
         {% endblock %}
     </head>
     <body>
+    <div class="nav">
+    <div class="bar">
+        <img src="/images/logo6.png">
+    </div>
+    <div class="bar">
+        <input type="text" placeholder="search">
+    </div>
+    <div class="bar">
+        <a id="myBtn">create post</a>
+        <a href="/dashboard">board</a>
+        <a href="">profile</a>
+        <a href="{{path('app_logout')}}">logout</a>
+    </div>
+</div>
         {% block body %}{% endblock %}
     </body>
 </html>
