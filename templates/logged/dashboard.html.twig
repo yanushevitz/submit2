@@ -1,71 +1,23 @@
 {% extends "logged/base.html.twig" %}
 
 {% block stylesheets %}
+{{parent()}}
     {{ encore_entry_link_tags('dashboard') }}
 {% endblock %}
 
 {% block javascripts %}
+    {{parent()}}
     {{ encore_entry_script_tags('dashboard') }}
 {% endblock %}
-
 
 {% block title %}
 submit | dashboard
 {%endblock%}
 {% block body %}
 <div class="container">
-{# <div id="myModal" class="modal"> #}
-    {# <div class="post">
-        <div class="image">
-            <img src="https://media.tenor.com/JXuQtMTbd2sAAAAd/yuigahama-yui.gif">
-        </div>
-        <div class="text">
-            Lorem minim consectetur est et deserunt. Consequat qui mollit elit aute cupidatat aute anim qui officia veniam do ea. Est non labore Lorem magna incididunt ullamco aute laboris sit cillum quis qui minim.
-        </div>
-        <div class="menu">
-            <div class="author">
-                <div class="img">O</div>
-                <div class="name">Author</div>
-            </div>
-            <div class="stats">
-                <div class="">
-                    Lajki
-                </div>
-                <div>Views</div>
-            </div>
-        </div>
-        <div class="comments">
-            <div class="comment">
-                    <div class="author">
-                        <div class="img">O</div>
-                        <div class="name">Author</div>
-                    </div>
-                    <div class="text">
-                        ja no Ex dolore aliqua dolore magna excepteur nisi sit Lorem magna culpa et ullamco sunt. Labore esse ipsum cupidatat esse. Duis tempor labore minim ullamco. Voluptate fugiat cillum quis est adipisicing minim tempor consequat cillum laborum veniam.
-                    </div>
-            </div>
-            <div class="comment">
-                    <div class="author">
-                        <div class="img">O</div>
-                        <div class="name">Author</div>
-                    </div>
-                    <div class="text">
-                        ja no Ex dolore aliqua dolore magna excepteur nisi sit Lorem magna culpa et ullamco sunt. Labore esse ipsum cupidatat esse. Duis tempor labore minim ullamco. Voluptate fugiat cillum quis est adipisicing minim tempor consequat cillum laborum veniam.
-                    </div>
-            </div>
-        </div>
-        
-    </div>
 
-        </div>
-        
-    </div> #}
-
-
-<!-- The Modal -->
 <div id="myModal" class="modal">
 
-  <!-- Modal content -->
   <div class="modal-content">
     <span class="close">&times;</span>
     <div class="post-form">
@@ -73,9 +25,8 @@ submit | dashboard
         <h1>Create post</h1>
             <textarea id="text"></textarea>
             <input type="file">
-            {# <button id="a">create post</button> #}
         </form>
-        <button id="submitPost">dupa</button>
+        <button id="submitPost">Create post</button>
     </div>
   </div>
 

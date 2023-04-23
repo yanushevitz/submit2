@@ -1,10 +1,12 @@
 {% extends "logged/base.html.twig" %}
 
 {% block stylesheets %}
-    {{ encore_entry_link_tags('dashboard') }}
+  {{parent()}}
+    {{ encore_entry_link_tags('post') }}
 {% endblock %}
 
 {% block javascripts %}
+    {{parent()}}
     {{ encore_entry_script_tags('post') }}
 {% endblock %}
 

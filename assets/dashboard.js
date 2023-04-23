@@ -28,7 +28,7 @@ async function fetchPosts() {
 
     text.innerText = a.text
     image.innerHTML = "<img src='http://127.0.0.1/uploads/" + a.image + "'>"
-    menu.innerHTML = "<div class='post-menu'><span class='reactions'>reactions: " + a.reactions + "</span><a href=''>add comment</a><a href=''>report</a><a href=''>follow thread</a></div>"
+    menu.innerHTML = "<div class='post-menu'><span class='reactions'>reactions: " + a.reactions + "</span><a href=/post/"+a.id+">add comment</a><a href=''>report</a><a href=''>follow thread</a></div>"
 
     a.comments.forEach(function (a) {
       let comment = document.createElement("div")
@@ -115,7 +115,30 @@ async function sendPost(formData){
 
 }
 
+function clearContainer(){
+  document.querySelector(".container").innerHTML = "";
+}
+
+function search(){
+  let searchbar = document.querySelector(".searchbar")
+  searchbar.addEventListener("keydown", function(a){
+    if(a.keyCode == 13){
+      clearContainer()
+      let phrase = searchbar.value
+      let results = fetchSearchResults(phrase)
+
+    }
+
+  })
+}
+async function fetchSearchResults(phrase){
+  let results = await fetch("/async/search", {
+    method: 'POST',
+    body: JSON.stringify({"phrase": phrase})
+  })
+}
 fetchPosts()
 shrinkComments()
 postModal()
 createPost()
+search()

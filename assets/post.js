@@ -1,3 +1,5 @@
+import './styles/post.css';
+
 async function fetchPost(){
     let postId = window.location.href
     postId = postId.split("/")
@@ -12,6 +14,10 @@ async function fetchPost(){
     let menu = document.createElement('div')
     let comments = document.createElement('div')
 
+    let commentForm = document.createElement('div')
+    commentForm.innerHTML = "<div class='comment-form'><h1>Create comment</h1><textarea></textarea></div>"
+
+    comments.append(commentForm)
     post.setAttribute('class', 'post')
     text.setAttribute('class', 'text')
     image.setAttribute('class', 'image')
@@ -20,7 +26,7 @@ async function fetchPost(){
 
     text.innerText = a.text
     image.innerHTML = "<img src='http://127.0.0.1/uploads/" + a.image + "'>"
-    menu.innerHTML = "<div class='post-menu'><span class='reactions'>reactions: " + a.reactions + "</span><a href=''>add comment</a><a href=''>report</a><a href=''>follow thread</a></div>"
+    menu.innerHTML = "<div class='post-menu'><span class='reactions'>reactions: " + a.reactions + "</span><a href=''>report</a><a href=''>follow thread</a></div>"
 
     if(a.comments){
         a.comments.forEach(function (a) {
@@ -45,8 +51,8 @@ async function fetchPost(){
     post.append(text)
     post.append(image)
     post.append(menu)
-    post.append(comments)
     document.querySelector(".container").append(post)
+    document.querySelector(".container").append(comments)
 }
 
 fetchPost()

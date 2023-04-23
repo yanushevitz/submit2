@@ -64,5 +64,15 @@ class AsyncController extends AbstractController
         $jsonData = $this->serializer->normalize($data, 'json');
         return new JsonResponse($jsonData);
     }
+    #[Route("/async/search", name: "async_search")]
+    public function search(Request $request){
+        $phrase = $request->getContent();
+        $phrase = $this->serializer->decode($phrase, 'json');
+        $phrase = $phrase['phrase'];
+        $query = $this->entityManager->createQuery("SELECT p.id, p.author, p.text FROM App\Entity\Post p WHERE p.text LIKE '%".$phrase."%'");
+        $result = $query->getResult();
+        return new JsonResponse($result);
+
+    }
 
 }

@@ -7,28 +7,30 @@
         </title>
         
         {% block stylesheets %}
-            {{ encore_entry_link_tags('base_logged') }}
+            {{ encore_entry_link_tags('base') }}
         {% endblock %}
 
         {% block javascripts %}
-            {{ encore_entry_script_tags('base_logged') }}
+            {{ encore_entry_script_tags('base') }}
         {% endblock %}
     </head>
     <body>
     <div class="nav">
-    <div class="bar">
-        <img src="/images/logo6.png">
+        <div class="bar">
+        <a href="/dashboard">
+            <img src="/images/logo6.png">
+            </a>
+        </div>
+        <div class="bar">
+            <input type="text" placeholder="search" class="searchbar">
+        </div>
+        <div class="bar">
+            <a id="myBtn">create post</a>
+            <a href="/dashboard">board</a>
+            <a href="">profile</a>
+            <a href="{{path('app_logout')}}">logout</a>
+        </div>
     </div>
-    <div class="bar">
-        <input type="text" placeholder="search">
-    </div>
-    <div class="bar">
-        <a id="myBtn">create post</a>
-        <a href="/dashboard">board</a>
-        <a href="">profile</a>
-        <a href="{{path('app_logout')}}">logout</a>
-    </div>
-</div>
-        {% block body %}{% endblock %}
+    {% block body %}{% endblock %}
     </body>
 </html>
