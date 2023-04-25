@@ -15,7 +15,7 @@ async function fetchPost(){
     let comments = document.createElement('div')
 
     let commentForm = document.createElement('div')
-    commentForm.innerHTML = "<div class='comment-form'><h1>Create comment</h1><textarea></textarea></div>"
+    commentForm.append(createCommentForm())
 
     comments.append(commentForm)
     post.setAttribute('class', 'post')
@@ -54,6 +54,37 @@ async function fetchPost(){
     document.querySelector(".container").append(post)
     document.querySelector(".container").append(comments)
 }
+function createCommentForm(){
+  let div = document.createElement("div")
+  div.setAttribute("class", "comment-form")
+  div.innerHTML = "<h1>Create comment</h1>"
+
+  let textarea = document.createElement("textarea")
+  textarea.setAttribute("id", "commentText")
+
+  let button = document.createElement("button")
+  button.setAttribute("id", "createComment")
+  button.innerText = "create comment"
+
+  button.addEventListener("click", sendComment)
+
+  div.append(textarea)
+  div.append(button)
+  return div
+}
+
+async function sendComment(){
+  let commentText = document.querySelector("#commentText").value
+  let postId = window.location.href
+    postId = postId.split("/")
+    postId.reverse()
+    postId = postId[0]
+  
+  
+  let status = await fetch("/async/comment/"+postId, {
+    method: "POST",
+    body: JSON.stringify({"text": commentText})
+  })
+}
 
 fetchPost()
-

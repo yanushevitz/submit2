@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Services\CommentService;
 use App\Services\PostService;
 use Auth0\SDK\Auth0;
 use Doctrine\ORM\EntityManager;
@@ -26,7 +27,8 @@ class AsyncController extends AbstractController
     private readonly Auth0 $auth0;
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly PostService $postService,       
+        private readonly PostService $postService,
+        private readonly CommentService $commentService       
     ){
         $this->auth0 = new Auth0([
             'domain' => $_ENV['AUTH0_DOMAIN'],
@@ -63,6 +65,7 @@ class AsyncController extends AbstractController
     public function createPost(Request $request){
         $user = $this->auth0->getUser()['sub'];
         $post = $this->postService->create($request, $user);
+        // $this->auth0->
         return new JsonResponse(['status' => 'created', "id" => $post]);
     }
 
@@ -80,7 +83,15 @@ class AsyncController extends AbstractController
         $query = $this->entityManager->createQuery("SELECT p.id, p.author, p.text FROM App\Entity\Post p WHERE p.text LIKE '%".$phrase."%'");
         $result = $query->getResult();
         return new JsonResponse($result);
+    }
 
+
+    #[Route("/async/comment/{id}", name: "async_comment_create")]
+    public function createComment(Request $request, $id){
+        $user = $this->auth0->getUser()['sub'];
+        $comment = $this->commentService->create($request, $user, $id);
+        // $this->auth0->
+        return new JsonResponse(['status' => 'created', "id" => 0]);
     }
 
 }
