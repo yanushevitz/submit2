@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Services\PostService;
+use Auth0\SDK\Auth0;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Http\Message\RequestInterface;
@@ -22,12 +23,18 @@ use Symfony\Component\Serializer\SerializerInterface;
 class AsyncController extends AbstractController
 {
     private readonly SerializerInterface $serializer;
+    private readonly Auth0 $auth0;
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly PostService $postService
-        
+        private readonly PostService $postService,       
     ){
-
+        $this->auth0 = new Auth0([
+            'domain' => $_ENV['AUTH0_DOMAIN'],
+            'clientId' => $_ENV['AUTH0_CLIENT_ID'],
+            'clientSecret' => $_ENV['AUTH0_CLIENT_SECRET'],
+            'cookieSecret' => $_ENV['AUTH0_COOKIE_SECRET']
+        ]);
+    
         $defaultContext = [ 
             AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function($object){
                 return $object->getAuthor();            
@@ -54,7 +61,8 @@ class AsyncController extends AbstractController
     }
     #[Route("/async/post", name: "async_post_create")]
     public function createPost(Request $request){
-        $post = $this->postService->create($request);
+        $user = $this->auth0->getUser()['sub'];
+        $post = $this->postService->create($request, $user);
         return new JsonResponse(['status' => 'created', "id" => $post]);
     }
 

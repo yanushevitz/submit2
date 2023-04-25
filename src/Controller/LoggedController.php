@@ -40,4 +40,9 @@ class LoggedController extends AbstractController
         return $this->render("logged/post.html.twig");
     }
 
+    #[Route("/profile/{id}", name: "app_profile")]
+    public function profile($id){
+        return $this->render('logged/profile.html.twig');
+    }
+
 }

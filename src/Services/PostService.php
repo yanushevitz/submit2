@@ -17,7 +17,7 @@ class PostService{
     {
 
     }
-    public function create(Request $request):int{
+    public function create(Request $request, string $user):int{
 
         $file = $request->files->get("file");
         $slicedFilename = explode(".", $file->getClientOriginalName());
@@ -30,7 +30,7 @@ class PostService{
         
         $postText = $request->request->get('text');
         $post = new Post();
-        $post->setAuthor(0);
+        $post->setAuthor($user);
         $post->setImage($filename);
         $post->setText($postText);
         $post->setReactions(0);
