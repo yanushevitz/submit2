@@ -42,4 +42,17 @@ class PostService{
         return $this->entityManager->find(Post::class, $id);
     }
 
+    public function fetchFrom($id){
+        // todo: make fetching new posts working
+        $posts = $this->entityManager->createQuery("SELECT p FROM App\Entity\Post p WHERE p.id > ".$id)->getArrayResult();
+        $posts['comments'] = [];
+        $comments = $this->entityManager->createQuery("SELECT c FROM App\Entity\Comment c WHERE c.post > ".$id)->getArrayResult();
+        // foreach($comments as $comments){
+
+        // }
+        echo '<pre>';
+        print_r($posts);
+        print_r($comments);
+    }
+
 }

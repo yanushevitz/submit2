@@ -61,6 +61,15 @@ class AsyncController extends AbstractController
         $response->headers->set('Access-Control-Allow-Origin', "*");
         return $response;
     }
+    #[Route('/async/posts/{id}', name: 'async_posts_update')]
+    public function update($id): Response
+    {
+        $posts = $this->postService->fetchFrom($id);
+        // var_dump($posts);
+        // die();
+        // $this->serializer->serialize($posts, "json");
+        return new JsonResponse($posts);
+    }
     #[Route("/async/post", name: "async_post_create")]
     public function createPost(Request $request){
         $user = $this->auth0->getUser()['sub'];
