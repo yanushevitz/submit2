@@ -14,10 +14,11 @@ async function fetchPost(){
     let menu = document.createElement('div')
     let comments = document.createElement('div')
 
-    let commentForm = document.createElement('div')
-    commentForm.append(createCommentForm())
+    // let commentForm = document.createElement('div')
+    let modal = document.querySelector('.modal-content').append(createCommentForm())
+    // commentForm.append(createCommentForm())
 
-    comments.append(commentForm)
+    // comments.append(commentForm)
     post.setAttribute('class', 'post')
     text.setAttribute('class', 'text')
     image.setAttribute('class', 'image')
@@ -85,6 +86,33 @@ async function sendComment(){
     method: "POST",
     body: JSON.stringify({"text": commentText})
   })
+
 }
 
+
+function commentModal() {
+
+
+  // Get the modal
+  var modal = document.getElementById("myModal");
+  
+  var span = document.getElementsByClassName("close")[0];
+  let vutn = document.querySelector("#myBtn");
+  
+  vutn.onclick = function () {
+    modal.style.display = "block";
+  }
+
+  span.onclick = function () {
+    modal.style.display = "none";
+  }
+  
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+  
+}
 fetchPost()
+commentModal()

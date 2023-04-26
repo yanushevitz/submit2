@@ -188,18 +188,32 @@
   }
 
   .comment-form{
-    /* width: 100%; */
-    background-color: #eee;
+    /* width: 70%; */
+    /* padding-inline: 15em; */
+    /* background-color: #eee; */
     padding: 2em;
-    border-radius: 20px;
+    /* border-radius: 20px; */
     margin: auto;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin-bottom: 0.5em;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+  .comment-form * {
+    max-width: 70%;
+    margin-inline: auto;
   }
   .comment-form textarea{
     min-width: 50%;
     min-height: 10vh;
+    border-radius: 10px;
+    padding: 0.5em;
+  }
+  .comment-form button{
+    margin-top: 1em;
+    padding: 0.5em;
+    border-radius: 10px;
   }
 @media(max-width: 1200px){
     body{
