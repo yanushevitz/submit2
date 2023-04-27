@@ -25,7 +25,8 @@
             <input type="text" placeholder="search" class="searchbar">
         </div>
         <div class="bar">
-            <a id="myBtn">create post</a>
+            {% block nav %}
+            {% endblock %}
             <a href="/dashboard">board</a>
             <a href="/profile/0">profile</a>
             <a href="{{path('app_logout')}}">logout</a>

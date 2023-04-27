@@ -59,7 +59,7 @@ async function fetchPosts() {
   })
   let refresh = document.querySelector(".refresh")
   refresh.addEventListener("click", async function (x) {
-    let posts = await fetch('/async/posts/' + 27).then(response=> response.json())
+    let posts = await fetch('/async/posts/' + 27).then(response => response.json())
     let container = document.querySelector(".container")
     console.log(posts);
     posts.forEach(function (a) {
@@ -103,21 +103,16 @@ async function fetchPosts() {
       post.append(image)
       post.append(menu)
       post.append(comments)
-      // container.prepend(post)
     })
-    // container.prepend()
   })
 }
 
 
 function postModal() {
 
-
-  // Get the modal
-  var modal = document.getElementById("myModal");
-
-  var span = document.getElementsByClassName("close")[0];
-  let vutn = document.querySelector("#myBtn");
+  let modal = document.getElementById("postModal");
+  let span = document.getElementsByClassName("close")[0];
+  let vutn = document.querySelector("#createPost");
 
   vutn.onclick = function () {
     modal.style.display = "block";
@@ -137,18 +132,17 @@ function postModal() {
 
 function createPost() {
 
-  // let button = form.
   let button = document.querySelector("#submitPost")
   let form = document.querySelector("#postForm")
   button.addEventListener("click", function (object) {
     sendPost(form)
   })
-  // form.addEventListener("")
 }
 
 function redirectToPost(id) {
   window.location.href = "/post/" + id;
 }
+
 async function sendPost(formData) {
   let text = formData.querySelector("textarea")
   let file = formData.querySelector("input")
@@ -171,24 +165,59 @@ function clearContainer() {
   document.querySelector(".container").innerHTML = "";
 }
 
-function search() {
+async function search() {
   let searchbar = document.querySelector(".searchbar")
   searchbar.addEventListener("keydown", function (a) {
     if (a.keyCode == 13) {
       clearContainer()
       let phrase = searchbar.value
-      let results = fetchSearchResults(phrase)
+      let container = document.querySelector(".container")
+      let resultsDiv = document.createElement("div")
 
+      resultsDiv.setAttribute("class", "results")
+
+
+      let results = fetchSearchResults(phrase).then(function (t) {
+        t.forEach(function (result) {
+          let resultDiv = document.createElement("div").setAttribute("class", "result")
+
+          let image = document.createElement("div")
+          let text = document.createElement("div")
+          let author = document.createElement("div")
+
+          image.setAttribute("class", "result-img")
+          text.setAttribute("class", "result-text")
+          author.setAttribute("class", "result-author")
+
+          // image.innerText = result.image
+          text.innerText = result.text
+          author.innerText = result.author
+          author.innerText = result.author
+
+          resultsDiv.append(image)
+          resultsDiv.append(text)
+          resultsDiv.append(author)
+
+          resultsDiv.append(result)
+
+        })
+        container.append(resultsDiv)
+      })
     }
-
   })
 }
+
+
 async function fetchSearchResults(phrase) {
-  let results = await fetch("/async/search", {
+  return await fetch("/async/search", {
     method: 'POST',
     body: JSON.stringify({ "phrase": phrase })
+  }).then(function (t) {
+    return t.json()
   })
 }
+
+
 fetchPosts()
 shrinkComments()
 postModal()
