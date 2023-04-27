@@ -116,6 +116,11 @@ function postModal() {
 
   vutn.onclick = function () {
     modal.style.display = "block";
+    window.addEventListener("keydown", function(p){
+      if(p.keyCode == 27){
+        modal.style.display = "none";
+      }
+    })
   }
 
   span.onclick = function () {
@@ -169,40 +174,42 @@ async function search() {
   let searchbar = document.querySelector(".searchbar")
   searchbar.addEventListener("keydown", function (a) {
     if (a.keyCode == 13) {
-      clearContainer()
       let phrase = searchbar.value
-      let container = document.querySelector(".container")
-      let resultsDiv = document.createElement("div")
+      if(phrase){
+        clearContainer()
+        let container = document.querySelector(".container")
+        let resultsDiv = document.createElement("div")
 
-      resultsDiv.setAttribute("class", "results")
+        resultsDiv.setAttribute("class", "results")
 
+        let results = fetchSearchResults(phrase).then(function (t) {
+          t.forEach(function (result) {
+            let resultDiv = document.createElement("div")
+            
+            let image = document.createElement("div")
+            let text = document.createElement("div")
+            let author = document.createElement("div")
+            let button = document.createElement("a")
+            
+            resultDiv.setAttribute("class", "result")
+            image.setAttribute("class", "result-img")
+            text.setAttribute("class", "result-text")
+            author.setAttribute("class", "result-author")
+            button.setAttribute("href", "/post/"+result.id)
+            
+            text.innerText = result.text
+            author.innerText = result.author
+            button.innerText = "go to thread"
+            
+            resultDiv.append(image)
+            resultDiv.append(text)
+            resultDiv.append(button)
+            resultsDiv.append(resultDiv)
 
-      let results = fetchSearchResults(phrase).then(function (t) {
-        t.forEach(function (result) {
-          let resultDiv = document.createElement("div").setAttribute("class", "result")
-
-          let image = document.createElement("div")
-          let text = document.createElement("div")
-          let author = document.createElement("div")
-
-          image.setAttribute("class", "result-img")
-          text.setAttribute("class", "result-text")
-          author.setAttribute("class", "result-author")
-
-          // image.innerText = result.image
-          text.innerText = result.text
-          author.innerText = result.author
-          author.innerText = result.author
-
-          resultsDiv.append(image)
-          resultsDiv.append(text)
-          resultsDiv.append(author)
-
-          resultsDiv.append(result)
-
+          })
+          container.append(resultsDiv)
         })
-        container.append(resultsDiv)
-      })
+      }
     }
   })
 }
@@ -217,9 +224,18 @@ async function fetchSearchResults(phrase) {
   })
 }
 
+function refresh(){
+  let button = document.querySelector(".refresh")
+  button.addEventListener("click", function(){
+    clearContainer()
+    fetchPosts()
+  })
+}
+
 
 fetchPosts()
-shrinkComments()
 postModal()
 createPost()
 search()
+refresh()
+shrinkComments()

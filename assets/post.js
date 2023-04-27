@@ -43,8 +43,8 @@ async function fetchPost(){
         })
 
     }
-    post.append(text)
     post.append(image)
+    post.append(text)
     post.append(menu)
     document.querySelector(".container").append(post)
     document.querySelector(".container").append(comments)

@@ -125,6 +125,33 @@
     color: var(--violet);
 }
 
+.results{
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 1em;
+    margin-top: 1em;
+}
+
+.result{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 1em;
+    border: 1px solid var(--violet);
+    margin: 1em 0;
+    border-radius: 10px;
+}
+.result div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+
 @media(max-width: 1200px) {
     body {
         font-size: 2em;
