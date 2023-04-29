@@ -232,6 +232,12 @@ function refresh(){
   })
 }
 
+async function getProfileId(){
+  let id = await fetch("/async/exchange").then((res)=>res.json())
+  
+
+}
+
 
 fetchPosts()
 postModal()
@@ -239,3 +245,4 @@ createPost()
 search()
 refresh()
 shrinkComments()
+getProfileId()
