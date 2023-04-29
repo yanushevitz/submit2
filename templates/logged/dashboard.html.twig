@@ -12,17 +12,16 @@
 
 {% block title %}
 submit | dashboard
+{% block nav %}
+  <a class="refresh">Refresh</a>
+  <a id="createPost">create post</a>
 {% endblock %}
 
-{% block nav %}
-<a id="myBtn">create post</a>
-{% endblock %}
 {% block body %}
 <div class="container">
-  <button class="refresh">Refresh</button>
+</div>
 
-<div id="myModal" class="modal">
-
+<div id="postModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
     <div class="post-form">
@@ -35,7 +34,6 @@ submit | dashboard
     </div>
   </div>
 
-</div>
 </div>
         
 

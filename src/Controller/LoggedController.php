@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Services\UserService;
 use Auth0\SDK\Auth0;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class LoggedController extends AbstractController
 {
     private Auth0 $auth0;
-    public function __construct(){
+    public function __construct(
+        private readonly UserService $userService
+    ){
         $this->auth0 = new Auth0([
             'domain' => $_ENV['AUTH0_DOMAIN'],
             'clientId' => $_ENV['AUTH0_CLIENT_ID'],
@@ -22,12 +25,15 @@ class LoggedController extends AbstractController
     #[Route('/dashboard', name: 'app_dashboard')]
     public function index(): Response
     {
-
-        $session = $this->auth0->getCredentials();
-        if($session === null){
+        $user = $this->auth0->getCredentials();
+        if($user === null){
             return $this->redirectToRoute("app_login");
         }
-        // var_dump($this->auth0->exchange());
+
+        if(!$this->userService->getProfileId($user)){
+            $this->userService->createProfile($user);
+        }
+
         return $this->render("logged/dashboard.html.twig");
     }
     #[Route("/logout", name: "app_logout")]
@@ -37,6 +43,8 @@ class LoggedController extends AbstractController
 
     #[Route("/post/{id}", name: "app_post")]
     public function post($id){
+
+
         return $this->render("logged/post.html.twig");
     }
 
