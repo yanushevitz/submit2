@@ -17,7 +17,7 @@ class PostService{
     {
 
     }
-    public function create(Request $request, string $user):int{
+    public function create(Request $request, int $user):int{
 
         $file = $request->files->get("file");
         $slicedFilename = explode(".", $file->getClientOriginalName());

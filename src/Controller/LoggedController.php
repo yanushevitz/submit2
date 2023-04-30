@@ -25,13 +25,13 @@ class LoggedController extends AbstractController
     #[Route('/dashboard', name: 'app_dashboard')]
     public function index(): Response
     {
-        $user = $this->auth0->getCredentials();
+        $user = $this->auth0->getUser();
         if($user === null){
             return $this->redirectToRoute("app_login");
         }
 
-        if(!$this->userService->getProfileId($user)){
-            $this->userService->createProfile($user);
+        if(!$this->userService->getProfileId($user['sub'])){
+            $this->userService->createProfile($user['sub']);
         }
 
         return $this->render("logged/dashboard.html.twig");

@@ -49,11 +49,11 @@ class AsyncController extends AbstractController
     {
         $posts = $this->entityManager->getRepository(Post::class)->findAll();
         $posts = array_reverse($posts);
-        $defaultContext = [ 
-            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function($object){
-                return $object->getName();            
-            }
-            ];
+        // $defaultContext = [ 
+        //     AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function($object){
+        //         return $object->getName();            
+        //     }
+        //     ];
         $json = $this->serializer->serialize($posts, 'json', ['groups' => ['user', 'comment']]);
         $response = new JsonResponse();
         $response->setContent($json);
@@ -68,8 +68,10 @@ class AsyncController extends AbstractController
     }
     #[Route("/async/post", name: "async_post_create")]
     public function createPost(Request $request){
-        $user = $this->auth0->getUser()['sub'];
-        $post = $this->postService->create($request, $user);
+        $user = $this->auth0->getUser();
+        $sub = $user['sub'];
+        $id = $this->userService->getProfileId($sub);
+        $post = $this->postService->create($request, $id);
         return new JsonResponse(['status' => 'created', "id" => $post]);
     }
 
@@ -99,7 +101,14 @@ class AsyncController extends AbstractController
 
     #[Route("/async/exchange", name: "async_exchange")]
     public function exchange(){        
-        return new Response($this->userService->getProfileId($this->auth0->getCredentials()));
+        return new Response($this->userService->getProfileId(($this->auth0->getUser())['sub']));
+    }
+    #[Route("/async/profile/{id}", name: "async_fetch_profile")]
+    public function fetchProfile($id){        
+        $profile = $this->userService->fetchProfile($id);
+        $posts = $this->userService->fetchUserPosts($id);
+        $profile = $this->serializer->normalize($profile, "json");
+        return new JsonResponse($profile);
     }
 
 

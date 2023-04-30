@@ -1,12 +1,22 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
+import './styles/profile.css';
 
-// any CSS you import will output into a single css file (app.css in this case)
-// import './styles/app.css';
+async function fetchProfile(){
+    let uri = window.location.pathname
+    let id = uri.split("/")
+    id = id.reverse()[0]
 
-// start the Stimulus application
-// import './bootstrap';
+    let profile = await fetch('/async/profile/'+id, {
+        method: "POST"
+    }).then((res)=>res.json())
+    
+    let container = document.querySelector(".container")
+    let profileDiv = document.createElement("div")
+
+    profileDiv.append(profile.id)
+    profileDiv.append(profile.nickname)
+    profileDiv.append(profile.auth0)
+    container.append(profileDiv)
+}
+
+
+fetchProfile()

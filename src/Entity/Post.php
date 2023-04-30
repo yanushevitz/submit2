@@ -24,7 +24,7 @@ class Post
     private ?string $image = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $author = null;
+    private ?int $author = null;
 
 
     
@@ -69,12 +69,12 @@ class Post
         return $this;
     }
 
-    public function getAuthor(): ?string
+    public function getAuthor(): ?int
     {
         return $this->author;
     }
 
-    public function setAuthor(string $author): self
+    public function setAuthor(int $author): self
     {
         $this->author = $author;
 

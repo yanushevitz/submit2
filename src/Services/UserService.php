@@ -11,8 +11,8 @@ class UserService{
     ){
     }
 
-    public function getProfileId($auth0){
-        $user = $this->entityManager->getRepository(User::class)->findOneBy(['auth0' => $auth0->user['sub']]);
+    public function getProfileId($user){
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['auth0'=>$user]);
         if(! $user){
             return null;
         }
@@ -20,13 +20,21 @@ class UserService{
 
     }
 
-    public function createProfile($auth0){
+    public function createProfile(string $auth0){
         $user = new User();
-        $user->setAuth0($auth0->user['sub']);
+        $user->setAuth0($auth0);
         $user->setNickname("Judaszenko");
         $this->entityManager->persist($user);
         $this->entityManager->flush();
         return $user->getId();
+    }
+
+    public function fetchProfile($id){
+        return $this->entityManager->getRepository(User::class)->findOneBy(['id'=>$id]);
+    }
+
+    public function fetchUserPosts($id){
+        return $this->entityManager->getRepository(Post::class)->findBy(['id'=>$id]);
     }
 
 }
