@@ -49,22 +49,11 @@ class AsyncController extends AbstractController
     {
         $posts = $this->entityManager->getRepository(Post::class)->findAll();
         $posts = array_reverse($posts);
-        // $defaultContext = [ 
-        //     AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function($object){
-        //         return $object->getName();            
-        //     }
-        //     ];
         $json = $this->serializer->serialize($posts, 'json', ['groups' => ['user', 'comment']]);
         $response = new JsonResponse();
         $response->setContent($json);
         $response->headers->set('Access-Control-Allow-Origin', "*");
         return $response;
-    }
-    #[Route('/async/posts/{id}', name: 'async_posts_update')]
-    public function update($id): Response
-    {
-        $posts = $this->postService->fetchFrom($id);
-        return new JsonResponse($posts);
     }
     #[Route("/async/post", name: "async_post_create")]
     public function createPost(Request $request){
@@ -106,7 +95,6 @@ class AsyncController extends AbstractController
     #[Route("/async/profile/{id}", name: "async_fetch_profile")]
     public function fetchProfile($id){        
         $profile = $this->userService->fetchProfile($id);
-        $posts = $this->userService->fetchUserPosts($id);
         $profile = $this->serializer->normalize($profile, "json");
         return new JsonResponse($profile);
     }

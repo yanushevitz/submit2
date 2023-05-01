@@ -27,7 +27,7 @@ async function fetchPosts() {
 
     text.innerText = a.text
     image.innerHTML = "<img src='http://127.0.0.1/uploads/" + a.image + "'>"
-    menu.innerHTML = "<div class='post-menu'><span class='reactions'>reactions: " + a.reactions + "</span><a href=/post/" + a.id + ">see thread</a><a href=''>report</a><a href=''>follow thread</a></div>"
+    menu.innerHTML = "<span class='reactions'>reactions: " + a.reactions + "</span><div class='post-menu'><a href=/post/" + a.id + ">see thread</a><a href=''>report</a><a href='/profile/"+a.author+"'>author</a><a href=''>follow thread</a></div>"
 
     a.comments.forEach(function (a) {
       let comment = document.createElement("div")

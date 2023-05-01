@@ -20,7 +20,7 @@ class Comment
     #[ORM\Column(length: 255)]
     private ?string $owner = null;
 
-    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\ManyToOne(inversedBy: 'comments', cascade: ["all"])]
     private ?Post $post = null;
 
     public function getId(): ?int

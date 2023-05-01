@@ -4,10 +4,12 @@ namespace App\Services;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
+use App\Entity\Post;
 class UserService{
 
     public function __construct(
-        private readonly EntityManagerInterface $entityManager
+        private readonly EntityManagerInterface $entityManager,
+        private readonly PostService $postService
     ){
     }
 
@@ -30,7 +32,9 @@ class UserService{
     }
 
     public function fetchProfile($id){
-        return $this->entityManager->getRepository(User::class)->findOneBy(['id'=>$id]);
+        $profile = $this->entityManager->getRepository(User::class)->findOneBy(['id'=>$id]);
+        $posts = $this->postService->fetchFromUser($id);
+        return ['profile'=>$profile, 'posts'=>$posts];
     }
 
     public function fetchUserPosts($id){

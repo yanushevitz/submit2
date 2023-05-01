@@ -106,25 +106,42 @@
 
 .reactions {
     color: var(--violet);
-    background-color: #fefefe;
-    padding: 1em;
+    /* background-color: #fefefe; */
+    padding: 0.5em;
     border-radius: 20px;
+    /* height: 100%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
 
 }
 
 .post-menu {
-    width: 100%;
+    width: 80%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     align-items: center;
     padding: 0;
 }
 
 .post-menu a {
+    border: 1px solid #ccc;
+    width: 30%;
+    text-align: center;
+    padding: 0.5em;
+    margin: 0.2em 0.2em;
+    border-radius: 20px;
     text-decoration: none;
     color: var(--violet);
+    transition: 200ms;
 }
 
+.post-menu a:hover{
+    background-color: #dad;
+    color: white;
+}
 .results{
     background-color: white;
     border-radius: 20px;
