@@ -169,10 +169,12 @@
 }
 
 
-@media(max-width: 1200px) {
+@media(max-width: 1000px) {
     body {
         font-size: 2em;
     }
+
+
 
     .container {
         width: 90%;

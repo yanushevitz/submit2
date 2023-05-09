@@ -99,3 +99,9 @@ body{
     text-decoration: none;
     cursor: pointer;
   }
+
+  @media (max-width: 1000px) {
+        .nav{
+            display: none;
+        }
+  }

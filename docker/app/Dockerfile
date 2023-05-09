@@ -19,6 +19,6 @@ RUN apt install npm -y
 
 RUN npm install -g n
 RUN n latest
-RUN npm install
-RUN npm update
-RUN npm run build
+# RUN npm install
+# RUN npm update
+# RUN npm run build
