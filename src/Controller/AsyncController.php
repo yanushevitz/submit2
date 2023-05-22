@@ -95,6 +95,8 @@ class AsyncController extends AbstractController
     #[Route("/async/profile/{id}", name: "async_fetch_profile")]
     public function fetchProfile($id){        
         $profile = $this->userService->fetchProfile($id);
+        // $auth = $this->auth0->decode();
+        // $profile = $profile + $auth;
         $profile = $this->serializer->normalize($profile, "json");
         return new JsonResponse($profile);
     }

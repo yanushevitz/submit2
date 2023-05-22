@@ -21,8 +21,10 @@ function renderProfile(profile){
     nick.setAttribute("class", "profile-nick")
     image.setAttribute("class", "profile-image")
 
-    nick.innerText = profile.nickname
-    image.innerHTML = "<img src='https://thumbs.gfycat.com/QuarterlyUnnaturalArrowcrab-size_restricted.gif'>"
+    console.log(profile)
+
+    nick.innerText = profile.profile.nickname
+    image.innerHTML = "<img src='"+ profile.picture +"'>"
 
     profileDiv.append(image)
     profileDiv.append(nick)
@@ -79,4 +81,3 @@ function renderProfile(profile){
 }
 
 fetchProfile()
-renderProfile()

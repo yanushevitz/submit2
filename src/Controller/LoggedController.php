@@ -31,7 +31,7 @@ class LoggedController extends AbstractController
         }
 
         if(!$this->userService->getProfileId($user['sub'])){
-            $this->userService->createProfile($user['sub']);
+            $this->userService->createProfile($user['sub'], $user['nickname']);
         }
 
         return $this->render("logged/dashboard.html.twig");

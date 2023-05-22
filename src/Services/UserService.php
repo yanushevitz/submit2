@@ -22,10 +22,10 @@ class UserService{
 
     }
 
-    public function createProfile(string $auth0){
+    public function createProfile(string $auth0, string $nickname){
         $user = new User();
         $user->setAuth0($auth0);
-        $user->setNickname("Judaszenko");
+        $user->setNickname($nickname);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
         return $user->getId();
