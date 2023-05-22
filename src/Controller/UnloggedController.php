@@ -27,12 +27,12 @@ class UnloggedController extends AbstractController
 
     #[Route('/login', name: 'app_login')]
     public function login(){
-        return $this->redirect($this->auth0->login("http://127.0.0.1/authenticate"));
+        return $this->redirect($this->auth0->login("http://judasz.ddns.net:8000/authenticate"));
     }
 
     #[Route('/authenticate', name: 'app_authenticate')]
     public function authenticate(){
-        $this->auth0->exchange("http://127.0.0.1/authenticate");
+        $this->auth0->exchange("http://judasz.ddns.net:8000/authenticate");
         return $this->redirectToRoute("app_dashboard");
     }
 

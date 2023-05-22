@@ -10,7 +10,7 @@ function shrinkComments() {
 }
 
 async function fetchPosts() {
-  let posty = await fetch("http://127.0.0.1/async/posts").then(response => response.json())
+  let posty = await fetch("http://judasz.ddns.net:8000/async/posts").then(response => response.json())
   let last = posty[0].id;
   posty.forEach(function (a) {
     let post = document.createElement('div')
@@ -26,8 +26,8 @@ async function fetchPosts() {
     comments.setAttribute('class', 'comments')
 
     text.innerText = a.text
-    image.innerHTML = "<img src='http://127.0.0.1/uploads/" + a.image + "'>"
-    menu.innerHTML = "<span class='reactions'>reactions: " + a.reactions + "</span><div class='post-menu'><a href=/post/" + a.id + ">see thread</a><a href=''>report</a><a href='/profile/"+a.author+"'>author</a><a href=''>follow thread</a></div>"
+    image.innerHTML = "<img src='http://judasz.ddns.net:8000/uploads/" + a.image + "'>"
+    menu.innerHTML = "<span class='reactions'>reactions: " + a.reactions + "</span><div class='post-menu'><a href=/post/" + a.id + ">see thread</a><a href=''>report</a><a href='/profile/"+a.author+"'>author</a><a class='follow' value='"+a.id+"'>follow thread</a></div>"
 
     a.comments.forEach(function (a) {
       let comment = document.createElement("div")
@@ -55,6 +55,7 @@ async function fetchPosts() {
     post.append(comments)
     document.querySelector(".container").append(post)
   })
+  follow()
 }
 
 function postModal() {
@@ -185,6 +186,31 @@ async function getProfileId(){
   let id = await fetch("/async/exchange").then((res)=>res.json())
 }
 
+async function follow(){
+  let followButtons = document.querySelectorAll(".follow")
+  followButtons.forEach(function(button){
+    button.addEventListener("click", function(event){
+      let postId = button.getAttribute("value")
+      let fromLocalStorage = localStorage.getItem("followed")
+      fromLocalStorage = Array.from(fromLocalStorage)
+      let filteredArray = []
+      fromLocalStorage.forEach(function(element){
+        if(element !== ","){
+          filteredArray.push(element)
+        }
+      })
+
+      function findSame(number){
+        return number == postId
+      }
+      if(filteredArray.find(findSame) == undefined){
+        filteredArray.push(postId)
+
+      }
+      localStorage.setItem("followed", filteredArray)
+    })
+  })
+}
 
 fetchPosts()
 postModal()

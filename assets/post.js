@@ -20,7 +20,7 @@ async function fetchPost(){
     comments.setAttribute('class', 'comments')
 
     text.innerText = a.text
-    image.innerHTML = "<img src='http://127.0.0.1/uploads/" + a.image + "'>"
+    image.innerHTML = "<img src='http://judasz.ddns.net:8000/uploads/" + a.image + "'>"
     menu.innerHTML = "<div class='post-menu'><span class='reactions'>reactions: " + a.reactions + "</span><a href=''>report</a><a href=''>follow thread</a></div>"
 
     if(a.comments){
