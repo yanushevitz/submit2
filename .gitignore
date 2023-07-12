@@ -19,3 +19,4 @@ yarn-error.log
 /docker/docker-compose.yml
 core
 /public/uploads/*
+/assets/node_modules/
