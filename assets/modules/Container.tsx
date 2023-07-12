@@ -1,10 +1,10 @@
 import React, { ReactNode } from 'react'
 
 interface Props{
-    children: ReactNode
+    children?: ReactNode
 }
 
-const Container = ({children}:Props) => {
+const Container = ({children=""}:Props) => {
   return (
     <div className="container">
         {children}

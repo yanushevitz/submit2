@@ -8,9 +8,10 @@ interface Props{
     comments: string[];
     id: string;
     reactions: string;
+    showLink?:boolean;
 }
 
-const Post = ({text, img, comments, id, reactions}: Props) => {
+const Post = ({text, img, comments, id, reactions, showLink=true}: Props) => {
   return (
     <>
         <div className="post">
@@ -20,7 +21,7 @@ const Post = ({text, img, comments, id, reactions}: Props) => {
             <div className="image">
               <img src={"http://192.168.1.36:8002/uploads/"+img}></img>
             </div>
-            <PostMenu id={id} reactions={reactions}></PostMenu>
+            <PostMenu id={id} reactions={reactions} showLink={showLink}></PostMenu>
             {comments.map((comment: any)=>{
                 return <PostComment author={comment.author} text={comment.text}></PostComment>
             })}

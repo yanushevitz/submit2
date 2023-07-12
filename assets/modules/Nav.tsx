@@ -1,10 +1,12 @@
 import React, { ReactNode } from 'react'
+import SearchBox from './SearchBox';
 
 interface Props{
-  children: ReactNode;
+  children?: ReactNode;
+  updateResults?: CallableFunction;
 }
 
-const Nav = ({children}:Props) => {
+const Nav = ({children=null, updateResults=function(){}}:Props) => {
   return (
     <>
     <div className="nav">
@@ -14,7 +16,7 @@ const Nav = ({children}:Props) => {
             </a>
         </div>
         <div className="bar">
-            <input type="text" placeholder="search" className="searchbar"/>
+            <SearchBox updateResults={updateResults}></SearchBox>
         </div>
         <div className="bar">
             {children}

@@ -34,7 +34,7 @@ class LoggedController extends AbstractController
             $this->userService->createProfile($user['sub'], $user['nickname']);
         }
 
-        return $this->render("logged/dashboard.html.twig");
+        return $this->render('logged/react.html.twig');
     }
     #[Route("/logout", name: "app_logout")]
     public function logout()
@@ -52,11 +52,6 @@ class LoggedController extends AbstractController
     public function profile($id)
     {
         return $this->render('logged/profile.html.twig');
-    }
-    #[Route("/react", name: "app_react")]
-    public function react()
-    {
-        return $this->render('logged/react.html.twig');
     }
 
 }

@@ -4,8 +4,9 @@ import Post from './modules/Post';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import Container from './modules/Container';
-// import './dashboard.js';
 import PostModal from './modules/PostModal';
+import Posts from './modules/Posts';
+import SearchResults from './modules/SearchResults';
 
 const convertToPost = (response: any)=>{
     let posts = response.map((post: any)=>{
@@ -26,6 +27,7 @@ const toggleModalStatus = (modalstatus: any, setModalStatus: any)=>{
 }
 
 function Dashboard() {
+  const [results, setResults] = useState([''])
   const [posts, setPosts] = useState([''])
   const [modalStatus, setModalStatus] = useState(false)
 
@@ -34,14 +36,19 @@ function Dashboard() {
   }, [])
 
   return (<>
-    <Nav>
+    <Nav updateResults={setResults}>
       <a className="refresh" onClick={()=>{
         fetch("http://192.168.1.36:8002/async/posts").then(response => response.json()).then((data)=>setPosts(convertToPost(data)))
       }}>Refresh</a>
       <a id="createPost" onClick={()=>toggleModalStatus(modalStatus, setModalStatus)}>create post</a>
     </Nav>
     <Container>
-      {posts}
+      <Posts>
+        {posts}
+      </Posts>
+      <SearchResults>
+        {results}
+      </SearchResults>
     </Container>
     <PostModal status={modalStatus} setStatus={setModalStatus}></PostModal>
   </>)

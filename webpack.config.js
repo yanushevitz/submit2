@@ -8,12 +8,16 @@ Encore
     .setOutputPath('public/build/')
     .setPublicPath('/build')
     // Entry config
-    .addEntry('index', './assets/index.js')
-    .addEntry('dashboard', './assets/dashboard.js')
-    .addEntry('post', './assets/post.js')
-    .addEntry('profile', './assets/profile.js')
-    .addEntry('base', './assets/base.js')
+    .addEntry('base', './assets/styles/base.css')
+    .addEntry('dashboard', './assets/styles/dashboard.css')
+    .addEntry('index', './assets/styles/index.css')
+    .addEntry('post', './assets/styles/post.css')
+    
     .addEntry('react-dashboard', './assets/react-dashboard.tsx')
+    .addEntry('react-post', './assets/react-post.tsx')
+    
+    // .addEntry('post', './assets/post.js')
+    .addEntry('profile', './assets/profile.js')
 
     // .enableStimulusBridge('./assets/controllers.json')
 

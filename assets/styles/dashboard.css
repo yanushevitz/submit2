@@ -145,11 +145,13 @@
 .results{
     background-color: white;
     border-radius: 20px;
-    display: flex;
+    
+    display: none;
     flex-direction: column;
     justify-content: space-evenly;
     padding: 1em;
     margin-top: 1em;
+
 }
 
 .result{
