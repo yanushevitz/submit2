@@ -1,41 +1,42 @@
 {% extends "logged/base.html.twig" %}
 
 {% block stylesheets %}
-{{parent()}}
-    {{ encore_entry_link_tags('dashboard') }}
+	{{parent()}}
+	{{ encore_entry_link_tags('dashboard') }}
 {% endblock %}
 
 {% block javascripts %}
-    {{parent()}}
-    {{ encore_entry_script_tags('dashboard') }}
-{% endblock %}
+	{{parent()}}
 
+	{{ encore_entry_script_tags('react-dashboard') }}
+{% endblock %}
 {% block title %}
-submit | dashboard
+	submit | dashboard
 {% endblock %}
 {% block nav %}
-  <a class="refresh">Refresh</a>
-  <a id="createPost">create post</a>
+	<a class="refresh">Refresh</a>
+	<a id="createPost">create post</a>
 {% endblock %}
 
 {% block body %}
-<div class="container">
-</div>
+	<div id="root">
+		<div class="container"></div>
+	</div>
 
-<div id="postModal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <div class="post-form">
-        <form method="POST" id="postForm">
-        <h1>Create post</h1>
-            <textarea id="text"></textarea>
-            <input type="file">
-        </form>
-        <button id="submitPost">Create post</button>
-    </div>
-  </div>
+	<div id="postModal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<div class="post-form">
+				<form method="POST" id="postForm">
+					<h1>Create post</h1>
+					<textarea id="text"></textarea>
+					<input type="file">
+				</form>
+				<button id="submitPost">Create post</button>
+			</div>
+		</div>
 
-</div>
-        
+	</div>
+
 
 {% endblock %}

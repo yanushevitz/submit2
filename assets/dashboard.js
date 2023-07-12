@@ -1,4 +1,8 @@
-import './styles/dashboard.css';
+import "./styles/dashboard.css"
+
+/**
+ * This function decreases comment's size to 180 characters in order to make commet fit in it's area (180 is random number so far)
+ */
 
 function shrinkComments() {
   let comments = document.querySelectorAll(".comment .text")
@@ -9,54 +13,9 @@ function shrinkComments() {
   })
 }
 
-async function fetchPosts() {
-  let posty = await fetch("http://judasz.ddns.net:8000/async/posts").then(response => response.json())
-  let last = posty[0].id;
-  posty.forEach(function (a) {
-    let post = document.createElement('div')
-    let text = document.createElement('div')
-    let image = document.createElement('div')
-    let menu = document.createElement('div')
-    let comments = document.createElement('div')
-
-    post.setAttribute('class', 'post')
-    text.setAttribute('class', 'text')
-    image.setAttribute('class', 'image')
-    menu.setAttribute('class', 'menu')
-    comments.setAttribute('class', 'comments')
-
-    text.innerText = a.text
-    image.innerHTML = "<img src='http://judasz.ddns.net:8000/uploads/" + a.image + "'>"
-    menu.innerHTML = "<span class='reactions'>reactions: " + a.reactions + "</span><div class='post-menu'><a href=/post/" + a.id + ">see thread</a><a href=''>report</a><a href='/profile/"+a.author+"'>author</a><a class='follow' value='"+a.id+"'>follow thread</a></div>"
-
-    a.comments.forEach(function (a) {
-      let comment = document.createElement("div")
-      let author = document.createElement('div')
-      let text = document.createElement('div')
-
-
-      comment.setAttribute("class", "comment")
-      author.setAttribute("class", "author")
-      text.setAttribute("class", "text")
-
-      author.innerText = "Author"
-      text.innerText = a.text
-
-      comment.append(author)
-      comment.append(text)
-
-      comments.append(comment)
-
-    })
-
-    post.append(text)
-    post.append(image)
-    post.append(menu)
-    post.append(comments)
-    document.querySelector(".container").append(post)
-  })
-  follow()
-}
+/**
+ * This function adds eventListener to modal responsible for creating post. It lets modal open/close and adds closing modal by clicking ESC (seprecated, TODO fix solution)
+ */
 
 function postModal() {
 
@@ -85,6 +44,10 @@ function postModal() {
 
 }
 
+/**
+ * This function adds eventListener to button that sends to server created post
+ */
+
 function createPost() {
 
   let button = document.querySelector("#submitPost")
@@ -94,9 +57,17 @@ function createPost() {
   })
 }
 
+/**
+ * This function redirects to specific post (used after creating post and after clicking "see thread" beneath post's text)
+ */
+
 function redirectToPost(id) {
   window.location.href = "/post/" + id;
 }
+
+/**
+ * This function sends post asynchronously (TODO add validation)
+ */
 
 async function sendPost(formData) {
   let text = formData.querySelector("textarea")
@@ -116,9 +87,9 @@ async function sendPost(formData) {
 
 }
 
-function clearContainer() {
-  document.querySelector(".container").innerHTML = "";
-}
+/**
+ * This function is responsible for sending request with input given in navbar and displaying it on cleaned .container
+ */
 
 async function search() {
   let searchbar = document.querySelector(".searchbar")
@@ -164,6 +135,9 @@ async function search() {
   })
 }
 
+/**
+ * This function only fetches searched phrase
+ */
 
 async function fetchSearchResults(phrase) {
   return await fetch("/async/search", {
@@ -174,17 +148,17 @@ async function fetchSearchResults(phrase) {
   })
 }
 
-function refresh(){
-  let button = document.querySelector(".refresh")
-  button.addEventListener("click", function(){
-    clearContainer()
-    fetchPosts()
-  })
-}
+/**
+ * This function fetches user ID from given AUTH0 identificator
+ */
 
 async function getProfileId(){
   let id = await fetch("/async/exchange").then((res)=>res.json())
 }
+
+/**
+ * Now working function that going to follow threads and send notification when new comment appears TODO
+ */
 
 async function follow(){
   let followButtons = document.querySelectorAll(".follow")
@@ -212,7 +186,7 @@ async function follow(){
   })
 }
 
-fetchPosts()
+
 postModal()
 createPost()
 search()
