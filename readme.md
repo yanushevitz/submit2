@@ -28,9 +28,30 @@ and migrate migrations:
 symfony console doctrine:migrations:migrate
 ```
 
-# Is this page bulletproof?
+# What actually works?
 
-Someday it might be, but so far it suffers from security issues
+- registering/loging users (via Auth0 API)
+- creating threads and comments
+- popping-up modals for creating post and comment
+- uploading files
+- refreshing without page reload (thanks to react.js)
+- desktop/mobile version
+- logout
+- search engine (at the moment only searches thread's content)
+
+# What doesn't work nor implemented yet?
+
+- comment/post deletion (this feature was implemented in Submit 1.0 but it was broken so it's not implemented yet)
+- comment/post sanitization
+- comment/post cooldown
+- pop-ups after refreshing, making new thread etc.
+- public user profiles (this idea has to be considered deeply)
+- following mechanism
+- post reporting mechanism
+- design sucks, I'm afraid of it
+- administration panels
+- error handling (for example when sending too large image, only error shows in API's response)
+- any unit tests, ~~I'm too dumb for this~~ n-no need for them actually when everything works ehehe~
 
 # Can I contribute?
 
