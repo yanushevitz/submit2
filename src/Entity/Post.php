@@ -35,6 +35,9 @@ class Post
     #[ORM\Column]
     private ?int $reactions = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $createdDate = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -119,6 +122,18 @@ class Post
     public function setReactions(int $reactions): self
     {
         $this->reactions = $reactions;
+
+        return $this;
+    }
+
+    public function getCreatedDate(): ?\DateTimeInterface
+    {
+        return $this->createdDate;
+    }
+
+    public function setCreatedDate(\DateTimeInterface $createdDate): self
+    {
+        $this->createdDate = $createdDate;
 
         return $this;
     }

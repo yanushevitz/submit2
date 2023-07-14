@@ -3,11 +3,12 @@ import React from "react";
 interface Props{
     reactions: string;
     id: string;
-    showLink?: boolean
+    showLink?: boolean;
+    owner?:number;
 
 }
 
-const PostMenu = ({reactions, id, showLink = true}: Props) => {
+const PostMenu = ({reactions, id, showLink = true, owner=0}: Props) => {
   return (
     <>
         <div className="menu">
@@ -16,7 +17,7 @@ const PostMenu = ({reactions, id, showLink = true}: Props) => {
             <div className='post-menu'>
                 {showLink ? <a href={"/post/" + id}>see thread</a> : null}
                 <a href=''>report</a>
-                <a href='/profile/"+a.author+"'>author</a>
+                <a href={'/profile/'+owner}>author</a>
                 <a className='follow'>follow thread</a>
             </div>
         </div>

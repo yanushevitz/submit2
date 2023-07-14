@@ -39,18 +39,26 @@ class LoggedController extends AbstractController
     #[Route("/logout", name: "app_logout")]
     public function logout()
     {
-        return $this->redirect($this->auth0->logout("http://judasz.ddns.net:8000"));
+        return $this->redirect($this->auth0->logout("http://" . $this->getParameter("app.scope")));
     }
 
     #[Route("/post/{id}", name: "app_post")]
     public function post($id)
     {
+        $user = $this->auth0->getUser();
+        if ($user === null) {
+            return $this->redirectToRoute("app_login");
+        }
         return $this->render("logged/post.html.twig");
     }
 
     #[Route("/profile/{id}", name: "app_profile")]
     public function profile($id)
     {
+        $user = $this->auth0->getUser();
+        if ($user === null) {
+            return $this->redirectToRoute("app_login");
+        }
         return $this->render('logged/profile.html.twig');
     }
 

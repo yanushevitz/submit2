@@ -1,0 +1,88 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: white;
+}
+
+body{
+    background-color: #C9B09a;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.container{
+    /* width: 70%; */
+    margin: auto;
+}
+
+.section{
+    /* margin: 1rem; */
+    height: 100vh;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section:nth-child(even){
+    background-color: #84735e;
+    color: #f4eee3;
+
+}
+.heading{
+    margin: auto;
+    font-size: 3rem;
+    /* background-image: url("https://freepngimg.com/save/72916-website-web-apple-mockup-laptop-modern-design/2300x1200"); */
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: header 800ms;
+}
+h1{
+    font-weight: 400;
+    /* backdrop-filter: brightness(0.5); */
+}
+.big{
+    font-size: 2em;
+    margin-inline-end: 2rem;
+}
+.arrow{
+    font-size: 10rem;
+    position: fixed;
+    bottom: 5rem;
+    text-align: center;
+    width: 100%;
+    /* width: 100%;
+    height: 100%; */
+    /* display: flex;
+    justify-content: center; */
+    align-items: center;
+    animation: arrow 1s infinite;
+}
+@keyframes header{
+    from{
+        opacity: 0;
+        transform: translateY(4rem);
+    }
+    to{
+        opacity: 100;
+        transform: translateY(0);
+
+    }
+}
+
+@keyframes arrow{
+    0%{
+        transform: translateY(4rem);
+    }
+    50%{
+        transform: translateY(-4rem);
+    }
+    100%{
+        transform: translateY(4rem);
+
+    }
+}

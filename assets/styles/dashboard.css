@@ -1,7 +1,7 @@
 .container {
     width: 70%;
     margin-inline: auto;
-    margin-top: 5em;
+    margin-top: 6rem;
 }
 
 .post {
@@ -217,7 +217,4 @@
         grid-row-end: 5;
     }
 
-    .nav div:first-child {
-        display: none;
-    }
 }

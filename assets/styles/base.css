@@ -19,7 +19,8 @@ body{
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     border-bottom: 1px solid var(--violet);
-    max-height: 10vh;
+    height: 5rem;
+    z-index: 999;
 }
 .nav a{
     margin-inline: 0.5em;
@@ -31,7 +32,7 @@ body{
 
 .bar{
     width: 100%;
-    padding-inline: 0.5em;
+    padding-inline: 0.1rem;
     text-align: center;
 }
 .bar:first-child{
@@ -39,6 +40,18 @@ body{
 }
 .bar:last-child{
     text-align: right;
+}
+
+.controls{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    visibility: visible;
+    transform: translateY(0);
+}
+.controls *{
+    display: inline-block;
+    text-align: center;
 }
 
 .nav img{
@@ -102,6 +115,26 @@ body{
 
   @media (max-width: 1000px) {
         .nav{
+            width: 100%;
+            z-index: 1;
+        }
+        .bar{
+            width: 100%;
+        }
+        .bar:nth-child(1){
             display: none;
+        }
+        .controls{
+            position: fixed;
+            display: flex;
+            /* visibility: hidden; */
+            /* visibility: ; */
+            flex-direction: column;
+            width: 100%;
+            left: 0;
+            background-color: #eedfee;
+            transform: translateY(-30rem);
+            transition: 500ms;
+            z-index: -1;
         }
   }

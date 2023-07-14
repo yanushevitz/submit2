@@ -9,9 +9,20 @@ interface Props{
     id: string;
     reactions: string;
     showLink?:boolean;
+    limit?:number;
 }
 
-const Post = ({text, img, comments, id, reactions, showLink=true}: Props) => {
+const Post = ({text, img, comments, id, reactions, showLink=true, limit=0}: Props) => {
+  let commentsLength = comments.length
+  comments = comments.reverse()
+  if(limit){
+    if(commentsLength > limit){
+      let remainder = commentsLength - limit
+      for (let i = 0; i < remainder; i++) {
+        comments.pop()
+      }  
+    }
+  }
   return (
     <>
         <div className="post">

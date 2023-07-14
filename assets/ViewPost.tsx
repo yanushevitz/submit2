@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Nav from './modules/Nav'
 import Container from './modules/Container'
 import Post from './modules/Post'
+import CommentModal from './modules/CommentModal'
 
 const fetchPost = async ()=>{
     let uri = window.location.href
@@ -29,11 +30,16 @@ const ViewPost = () => {
   return (
     <>
         <Nav>
+            <a className="refresh" onClick={()=>fetchPost().then((data)=>setPost(data))}>Refresh</a>
             <a id="commentButton" onClick={toggleModal}>Add comment</a>
         </Nav>
         <Container>
             {post}
         </Container>
+        <CommentModal updateCallback={()=>{
+            fetchPost()
+            .then((data)=>setPost(data))
+        }} />
     </>
   )
 }

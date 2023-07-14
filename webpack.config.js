@@ -12,8 +12,10 @@ Encore
     .addEntry('dashboard', './assets/styles/dashboard.css')
     .addEntry('index', './assets/styles/index.css')
     .addEntry('post', './assets/styles/post.css')
+    .addEntry('w', './assets/styles/w.css')
     
     .addEntry('react-dashboard', './assets/react-dashboard.tsx')
+    .addEntry('react-profile', './assets/react-profile.tsx')
     .addEntry('react-post', './assets/react-post.tsx')
     
     // .addEntry('post', './assets/post.js')

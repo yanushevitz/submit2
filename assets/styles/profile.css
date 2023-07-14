@@ -1,7 +1,5 @@
-.fake-nav{
-    height: 10vh;
-}
 .container{
+    margin-top: 10rem;
     padding: 1em;
     display: flex;
     justify-content: space-around;

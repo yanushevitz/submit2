@@ -26,21 +26,21 @@ class AsyncController extends AbstractController
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
         private readonly PostService $postService,
-        private readonly CommentService $commentService    ,
-        private readonly UserService $userService   
-    ){
+        private readonly CommentService $commentService,
+        private readonly UserService $userService
+    ) {
         $this->auth0 = new Auth0([
             'domain' => $_ENV['AUTH0_DOMAIN'],
             'clientId' => $_ENV['AUTH0_CLIENT_ID'],
             'clientSecret' => $_ENV['AUTH0_CLIENT_SECRET'],
             'cookieSecret' => $_ENV['AUTH0_COOKIE_SECRET']
         ]);
-    
-        $defaultContext = [ 
-            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function($object){
-                return $object->getAuthor();            
+
+        $defaultContext = [
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object) {
+                return null;
             }
-            ];
+        ];
         $this->serializer = new Serializer([new ObjectNormalizer(defaultContext: $defaultContext)], [new JsonEncoder]);
     }
 
@@ -56,7 +56,8 @@ class AsyncController extends AbstractController
         return $response;
     }
     #[Route("/async/post", name: "async_post_create")]
-    public function createPost(Request $request){
+    public function createPost(Request $request)
+    {
         $user = $this->auth0->getUser();
         $sub = $user['sub'];
         $id = $this->userService->getProfileId($sub);
@@ -65,35 +66,47 @@ class AsyncController extends AbstractController
     }
 
     #[Route("/async/post/{id}", name: "async_post_fetch")]
-    public function fetchPost($id){
+    public function fetchPost($id)
+    {
         $data = $this->postService->fetchById($id);
         $jsonData = $this->serializer->normalize($data, 'json');
         return new JsonResponse($jsonData);
     }
     #[Route("/async/search", name: "async_search")]
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $phrase = $request->getContent();
         $phrase = $this->serializer->decode($phrase, 'json');
         $phrase = $phrase['phrase'];
-        $query = $this->entityManager->createQuery("SELECT p.id, p.author, p.text FROM App\Entity\Post p WHERE p.text LIKE '%".$phrase."%'");
+        $query = $this->entityManager->createQuery("SELECT p.id, p.author, p.text FROM App\Entity\Post p WHERE p.text LIKE '%" . $phrase . "%'");
         $result = $query->getResult();
         return new JsonResponse($result);
     }
 
 
     #[Route("/async/comment/{id}", name: "async_comment_create")]
-    public function createComment(Request $request, $id){
+    public function createComment(Request $request, $id)
+    {
         $user = $this->auth0->getUser()['sub'];
         $comment = $this->commentService->create($request, $user, $id);
         return new JsonResponse(['status' => 'created', "id" => 0]);
     }
 
+    #[Route("/async/auth0user", name: "async_auth0user")]
+    public function auth0user()
+    {
+        return $this->json(['img' => $this->auth0->getUser()['picture']]);
+        // return new Response($this->userService->getProfileId(($this->auth0->getUser())['sub']));
+    }
     #[Route("/async/exchange", name: "async_exchange")]
-    public function exchange(){        
+    public function exchange()
+    {
+        // return new Response(($this->auth0->getUser()));
         return new Response($this->userService->getProfileId(($this->auth0->getUser())['sub']));
     }
     #[Route("/async/profile/{id}", name: "async_fetch_profile")]
-    public function fetchProfile($id){        
+    public function fetchProfile($id)
+    {
         $profile = $this->userService->fetchProfile($id);
         // $auth = $this->auth0->decode();
         // $profile = $profile + $auth;

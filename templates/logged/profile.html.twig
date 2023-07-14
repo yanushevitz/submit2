@@ -1,21 +1,20 @@
 {% extends "logged/base.html.twig" %}
 
 {% block stylesheets %}
-  {{parent()}}
-    {{ encore_entry_link_tags('profile') }}
+	{{parent()}}
+	{{ encore_entry_link_tags('profile') }}
+	{{ encore_entry_link_tags('react-profile') }}
 {% endblock %}
 
 {% block javascripts %}
-    {{parent()}}
-    {{ encore_entry_script_tags('profile') }}
+	{{parent()}}
+	{{ encore_entry_script_tags('react-profile') }}
 {% endblock %}
 
 
 {% block title %}
-submit | profile
+	submit | profile
 {% endblock %}
 {% block body %}
-<div class="fake-nav"></div>
-<div class="container">
-</div>
+	<div id="root"></div>
 {% endblock %}

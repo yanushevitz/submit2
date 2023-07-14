@@ -19,10 +19,12 @@ const Nav = ({children=null, updateResults=function(){}}:Props) => {
             <SearchBox updateResults={updateResults}></SearchBox>
         </div>
         <div className="bar">
+          <div className="controls">
             {children}
             <a href="/dashboard">board</a>
             <a href="/profile/0">profile</a>
-            <a href="{{path('app_logout')}}">logout</a>
+            <a href="/logout">logout</a>
+          </div>
         </div>
     </div>
     </>
