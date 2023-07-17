@@ -30,7 +30,7 @@ const Post = ({text, img, comments, id, reactions, showLink=true, limit=0}: Prop
               {text}
             </div>
             <div className="image">
-              <img src={"http://192.168.1.36:8002/uploads/"+img}></img>
+              <img src={"http://192.168.5.12:8002/uploads/"+img}></img>
             </div>
             <PostMenu id={id} reactions={reactions} showLink={showLink}></PostMenu>
             {comments.map((comment: any)=>{

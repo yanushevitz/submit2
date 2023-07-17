@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  app:
+    build:
+      context: app/
+    working_dir: /var/www/
+    restart: always
+    volumes:
+      - ../:/var/www/
+    container_name: submit2_app
+  db:
+    build: 
+      context: db/
+    environment:
+      - MYSQL_ROOT_PASSWORD= < insert your password here >
+    restart: always
+    ports:
+      - "3307:3306"
+    container_name: submit2_db
+  nginx:
+    image: nginx:1.19-alpine
+    working_dir: /var/www/
+    volumes:
+      - ./../:/var/www/
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/mime.types:/etc/nginx/mime.types
+    ports:
+      - "8002:80"
+    restart: always
+    container_name: submit2_nginx

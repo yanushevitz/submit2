@@ -109,13 +109,13 @@ function Dashboard() {
   
 
   useEffect(()=>{
-    fetch("http://192.168.1.36:8002/async/posts").then(response => response.json()).then((data)=>setPosts(convertToPost(data)))
+    fetch("http://192.168.5.12:8002/async/posts").then(response => response.json()).then((data)=>setPosts(convertToPost(data)))
   }, [])
 
   return (<>
     <Nav updateResults={setResults}>
       <a className="refresh" onClick={()=>{
-        fetch("http://192.168.1.36:8002/async/posts").then(response => response.json()).then((data)=>setPosts(convertToPost(data)))
+        fetch("http://192.168.5.12:8002/async/posts").then(response => response.json()).then((data)=>setPosts(convertToPost(data)))
       }}>Refresh</a>
       <a id="createPost" onClick={()=>toggleModalStatus(modalStatus, setModalStatus)}>create post</a>
     </Nav>

@@ -60,3 +60,11 @@ Of course, but if you like to, text me so we can consider changes and ideas. Als
 # Did Gomez know about fire wizards murder?
 
 [no.](https://youtu.be/uAsIRW86750)
+
+# Images gallery
+
+![submit](https://i.ibb.co/MNwsNtF/submit6.png)
+![submit](https://i.ibb.co/zbwsxq4/submit5.png)
+![submit](https://i.ibb.co/rcPNfK9/submit2.png)
+![submit](https://i.ibb.co/qY2xcXV/submit3.png)
+![submit](https://i.ibb.co/1sPLSfK/submit4.png)
