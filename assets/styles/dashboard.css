@@ -5,7 +5,7 @@
 }
 
 .post {
-    border: 1px solid var(--violet);
+    border: 1px solid var(--dark);
     border-radius: 20px;
     padding: 0.5em;
     display: grid;
@@ -67,17 +67,17 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 0.5em;
-    border: 1px solid var(--violet);
+    border: 1px solid var(--dark);
     border-radius: 20px;
 }
 
 .comment .author {
-    border-bottom: 1px solid var(--violet);
+    border-bottom: 1px solid var(--dark);
     display: flex;
 }
 
 .post .menu {
-    border: 1px solid var(--violet);
+    border: 1px solid var(--dark);
     border-radius: 20px;
 }
 
@@ -105,7 +105,7 @@
 }
 
 .reactions {
-    color: var(--violet);
+    color: var(--dark);
     /* background-color: #fefefe; */
     padding: 0.5em;
     border-radius: 20px;
@@ -134,7 +134,7 @@
     margin: 0.2em 0.2em;
     border-radius: 20px;
     text-decoration: none;
-    color: var(--violet);
+    color: var(--dark);
     transition: 200ms;
 }
 
@@ -158,7 +158,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     padding: 1em;
-    border: 1px solid var(--violet);
+    border: 1px solid var(--dark);
     margin: 1em 0;
     border-radius: 10px;
 }

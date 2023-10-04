@@ -17,11 +17,11 @@ class Comment
     #[ORM\Column(type: Types::TEXT)]
     private ?string $text = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $owner = null;
-
     #[ORM\ManyToOne(inversedBy: 'comments', cascade: ["all"])]
     private ?Post $post = null;
+
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    private ?Anon $author = null;
 
     public function getId(): ?int
     {
@@ -40,18 +40,6 @@ class Comment
         return $this;
     }
 
-    public function getOwner(): ?string
-    {
-        return $this->owner;
-    }
-
-    public function setOwner(string $owner): self
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
     public function getPost(): ?Post
     {
         return $this->post;
@@ -60,6 +48,18 @@ class Comment
     public function setPost(?Post $post): self
     {
         $this->post = $post;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Anon
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Anon $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

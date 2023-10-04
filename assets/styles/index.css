@@ -6,28 +6,37 @@
 
 :root {
     --violet: #552177;
+    --dark: rgba(0,0,0,0.1);
+    --secondary: rgba(20,20,20,0.5);
 }
 
 body {
-    background-color: var(--violet);
+    background-color: var(--dark);
     color: #fff;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 .nav {
-    background-color: var(--violet);
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    /* margin-inline: 0; */
+    background-color: var(--dark);
     color: white;
     display: flex;
-    padding: 1em;
+    /* padding: 1em; */
     font-size: 1.2em;
     justify-content: space-between;
-    justify-content: flex-end;
+    justify-content: center;
+    /* width: 100%; */
 }
 
 .nav a {
     color: gray;
     text-decoration: none;
     transition: 200ms;
+    margin-inline: 0.3rem;
+    padding: 1rem 0.5rem;
 }
 
 .nav a:hover {
@@ -35,14 +44,25 @@ body {
 }
 
 .head {
-    background-color: var(--violet);
+    background-color: var(--dark);
     display: flex;
     justify-content: space-evenly;
 }
 
 .head-bottom {
     min-height: 20vh;
-    background: linear-gradient(to top left, #eee calc(50% - 1px), var(--violet), var(--violet) calc(50% + 1px));
+    background: linear-gradient(to top left, #eee calc(50% - 1px), var(--dark), var(--dark) calc(50% + 1px));
+}
+.container{
+    position: fixed;
+    /* margin: 0; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: brightness(0.35);
+    flex-direction: column;
 }
 
 .column {
@@ -83,7 +103,7 @@ body {
 }
 
 .section:nth-child(odd+1) {
-    background-color: var(--violet);
+    background-color: var(--dark);
     color: white;
 }
 
@@ -104,14 +124,14 @@ body {
 }
 
 .violet {
-    background-color: var(--violet);
+    background-color: var(--dark);
     color: white
 }
 
 .section-bottom {
-    background: linear-gradient(to top left, var(--violet) calc(50% - 1px), #eee, #eee calc(50% + 1px));
+    background: linear-gradient(to top left, var(--dark) calc(50% - 1px), #eee, #eee calc(50% + 1px));
     min-height: 15vh;
-    border-bottom: 1px solid var(--violet);
+    border-bottom: 1px solid var(--dark);
 }
 
 .section h1 {
@@ -119,10 +139,25 @@ body {
 }
 
 .footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    /* background-color: var(--dark); */
+    padding: 1rem;
+    color: #ddd;
+    /* display: flex; */
+    /* justify-content: space-evenly; */
+    font-size: 0.7rem;
 
-    display: flex;
-    justify-content: space-evenly;
-
+}
+.footer a{
+    text-decoration: none;
+    color: gray;
+    transition: 200ms;
+}
+.footer a:hover{
+    color: white;
 }
 
 .footer-section {
@@ -142,8 +177,70 @@ body {
 .footer-section a:hover {
     color: white;
 }
+.main{
+    
+    /* padding: 1re; */
+    text-align: center;
+    font-size: 2rem;
+    width: 90%;
+    min-height: 60%;
+    /* height: 70%; */
+    /* margin: auto; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* background-color: var(--secondary); */
+    padding: 2rem;
+}
+.main * {
+    margin: 1rem;
+}
+.bg-video{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+}
 
+.journey{
+    text-decoration: none;
+    color: #eee;
+    border: 1px solid gray;
+    padding: 1rem;
+    border-radius: 20px;
+    transition: 200ms;
+}
+.journey:hover{
+    color: white;
+    border: 1px solid white;
+}
+@media(min-aspect-ratio: 16/9){
+    .bg-video{
+        width: 100%;
+        height: auto;
+    }
+}
+@media(max-aspect-ratio: 16/9){
+    .bg-video{
+        width: auto;
+        height: 100%;
+    }
+}
 @media (max-width: 1000px) {
+    body{
+        font-size: 1.5rem;
+    }
+    .main h2{
+        font-size: 5rem;
+    }
+    .main p{
+        font-size: 2rem;
+    }
+    .main a{
+        font-size: 3rem;
+        padding: 2rem;
+    }
     .quote h1 {
         font-size: 3em
     }
@@ -151,11 +248,6 @@ body {
     .subquote h2 {
         font-size: 2em;
     }
-
-    .nav {
-        padding: 2em;
-    }
-
     .nav a {
         font-size: 2em;
     }
@@ -191,10 +283,15 @@ body {
     }
 
     .footer {
-        align-items: center;
+        /* align-items: center; */
     }
 
     .footer-section {
         font-size: 2em;
+    }
+    .bg-video{
+        /* transform: translateX(52rem); */
+        /* right: auto; */
+        /* left: -5rem; */
     }
 }

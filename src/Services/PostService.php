@@ -18,7 +18,7 @@ class PostService
     ) {
 
     }
-    public function create(Request $request, int $user): int
+    public function create(Request $request): int
     {
 
         $file = $request->files->get("file");
@@ -32,11 +32,11 @@ class PostService
 
         $postText = $request->request->get('text');
         $post = new Post();
-        $post->setAuthor($user);
+        // $post->setAuthor($user);
         $post->setCreatedDate(new \DateTime());
         $post->setImage($filename);
         $post->setText($postText);
-        $post->setReactions(0);
+        // $post->setReactions(0);
         $this->entityManager->persist($post);
         $this->entityManager->flush();
         return $post->getId();

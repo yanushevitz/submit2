@@ -23,20 +23,15 @@ class Post
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\Column(length: 255)]
-    private ?int $author = null;
-
-
-    
     #[ORM\OneToMany(mappedBy: 'post', targetEntity: Comment::class)]
     #[Groups("post")]
     private Collection $comments;
 
-    #[ORM\Column]
-    private ?int $reactions = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdDate = null;
+
+    #[ORM\ManyToOne(inversedBy: 'posts')]
+    private ?Anon $author = null;
 
     public function __construct()
     {
@@ -72,18 +67,6 @@ class Post
         return $this;
     }
 
-    public function getAuthor(): ?int
-    {
-        return $this->author;
-    }
-
-    public function setAuthor(int $author): self
-    {
-        $this->author = $author;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Comment>
      */
@@ -114,18 +97,6 @@ class Post
         return $this;
     }
 
-    public function getReactions(): ?int
-    {
-        return $this->reactions;
-    }
-
-    public function setReactions(int $reactions): self
-    {
-        $this->reactions = $reactions;
-
-        return $this;
-    }
-
     public function getCreatedDate(): ?\DateTimeInterface
     {
         return $this->createdDate;
@@ -134,6 +105,18 @@ class Post
     public function setCreatedDate(\DateTimeInterface $createdDate): self
     {
         $this->createdDate = $createdDate;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?Anon
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Anon $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

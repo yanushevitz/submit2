@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Services\CommentService;
 use App\Services\PostService;
-use App\Services\UserService;
 use Auth0\SDK\Auth0;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +26,6 @@ class AsyncController extends AbstractController
         private readonly EntityManagerInterface $entityManager,
         private readonly PostService $postService,
         private readonly CommentService $commentService,
-        private readonly UserService $userService
     ) {
         $this->auth0 = new Auth0([
             'domain' => $_ENV['AUTH0_DOMAIN'],
@@ -58,10 +56,7 @@ class AsyncController extends AbstractController
     #[Route("/async/post", name: "async_post_create")]
     public function createPost(Request $request)
     {
-        $user = $this->auth0->getUser();
-        $sub = $user['sub'];
-        $id = $this->userService->getProfileId($sub);
-        $post = $this->postService->create($request, $id);
+        $post = $this->postService->create($request);
         return new JsonResponse(['status' => 'created', "id" => $post]);
     }
 

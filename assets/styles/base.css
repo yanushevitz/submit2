@@ -4,6 +4,7 @@
 }
 :root{
     --violet: #552177;
+    --dark: #121212;
 }
 body{
     background-color: #eedfee;
@@ -18,7 +19,7 @@ body{
     align-items: center;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    border-bottom: 1px solid var(--violet);
+    border-bottom: 1px solid var(--dark);
     height: 5rem;
     z-index: 999;
 }
@@ -63,13 +64,13 @@ body{
     width: 70%;
     text-align: center;
     padding: 1em;
-    border: 1px solid var(--violet);
+    border: 1px solid var(--dark);
 }
 
 
 .nav a:hover{
-    color: var(--violet);
-    border-bottom: 1px solid var(--violet);
+    color: var(--dark);
+    border-bottom: 1px solid var(--dark);
     cursor: pointer;
 }
 
@@ -96,7 +97,7 @@ body{
     padding: 20px;
     border: 1px solid #888;
     width: 40%; 
-    border: 1px solid var(--violet);
+    border: 1px solid var(--dark);
     border-radius: 20px;
 }
   

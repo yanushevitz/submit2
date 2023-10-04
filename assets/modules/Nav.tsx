@@ -21,9 +21,7 @@ const Nav = ({children=null, updateResults=function(){}}:Props) => {
         <div className="bar">
           <div className="controls">
             {children}
-            <a href="/dashboard">board</a>
-            <a href="/profile/0">profile</a>
-            <a href="/logout">logout</a>
+            <a href="/dashboard">b</a>
           </div>
         </div>
     </div>
