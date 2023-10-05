@@ -207,7 +207,7 @@ body {
     text-decoration: none;
     color: #eee;
     border: 1px solid gray;
-    padding: 1rem;
+    padding: 0.5rem 2rem;
     border-radius: 20px;
     transition: 200ms;
 }

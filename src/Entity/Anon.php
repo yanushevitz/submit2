@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\AnonRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AnonRepository::class)]
@@ -16,19 +15,19 @@ class Anon
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 15)]
+    #[ORM\Column(length: 255)]
     private ?string $identifier = null;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Post::class)]
-    private Collection $posts;
+    #[ORM\OneToMany(mappedBy: 'anon', targetEntity: Thread::class)]
+    private Collection $threads;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class)]
-    private Collection $comments;
+    #[ORM\OneToMany(mappedBy: 'creator', targetEntity: Reply::class)]
+    private Collection $replies;
 
     public function __construct()
     {
-        $this->posts = new ArrayCollection();
-        $this->comments = new ArrayCollection();
+        $this->threads = new ArrayCollection();
+        $this->replies = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -36,7 +35,12 @@ class Anon
         return $this->id;
     }
 
-    public function setID(string $identifier): self
+    public function getIdentifier(): ?string
+    {
+        return $this->identifier;
+    }
+
+    public function setIdentifier(string $identifier): self
     {
         $this->identifier = $identifier;
 
@@ -44,29 +48,29 @@ class Anon
     }
 
     /**
-     * @return Collection<int, Post>
+     * @return Collection<int, Thread>
      */
-    public function getPosts(): Collection
+    public function getThreads(): Collection
     {
-        return $this->posts;
+        return $this->threads;
     }
 
-    public function addPost(Post $post): self
+    public function addThread(Thread $thread): self
     {
-        if (!$this->posts->contains($post)) {
-            $this->posts->add($post);
-            $post->setAuthor($this);
+        if (!$this->threads->contains($thread)) {
+            $this->threads->add($thread);
+            $thread->setAnon($this);
         }
 
         return $this;
     }
 
-    public function removePost(Post $post): self
+    public function removeThread(Thread $thread): self
     {
-        if ($this->posts->removeElement($post)) {
+        if ($this->threads->removeElement($thread)) {
             // set the owning side to null (unless already changed)
-            if ($post->getAuthor() === $this) {
-                $post->setAuthor(null);
+            if ($thread->getAnon() === $this) {
+                $thread->setAnon(null);
             }
         }
 
@@ -74,29 +78,29 @@ class Anon
     }
 
     /**
-     * @return Collection<int, Comment>
+     * @return Collection<int, Reply>
      */
-    public function getComments(): Collection
+    public function getReplies(): Collection
     {
-        return $this->comments;
+        return $this->replies;
     }
 
-    public function addComment(Comment $comment): self
+    public function addReply(Reply $reply): self
     {
-        if (!$this->comments->contains($comment)) {
-            $this->comments->add($comment);
-            $comment->setAuthor($this);
+        if (!$this->replies->contains($reply)) {
+            $this->replies->add($reply);
+            $reply->setCreator($this);
         }
 
         return $this;
     }
 
-    public function removeComment(Comment $comment): self
+    public function removeReply(Reply $reply): self
     {
-        if ($this->comments->removeElement($comment)) {
+        if ($this->replies->removeElement($reply)) {
             // set the owning side to null (unless already changed)
-            if ($comment->getAuthor() === $this) {
-                $comment->setAuthor(null);
+            if ($reply->getCreator() === $this) {
+                $reply->setCreator(null);
             }
         }
 
