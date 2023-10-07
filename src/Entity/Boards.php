@@ -72,4 +72,12 @@ class Boards
 
         return $this;
     }
+
+    public function getTitle()
+    {
+        return $this->getSymbol();
+    }
+    public function getDescription(){
+        return "";
+    }
 }

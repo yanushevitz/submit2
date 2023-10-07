@@ -13,16 +13,15 @@
 {% block javascripts %}
 	{{ encore_entry_script_tags('index') }}
 {% endblock %}
-
 {% block body %}
+	<div class="nav">
+		{% for board in boards %}
+			<a href="#">/{{board.symbol}}/</a>
+		{% endfor %}
+	</div>
 	<video autoplay loop muted plays-inline class="bg-video">
 		<source src="images/bg.mp4" type="video/mp4">
 	</video>
-	<div class="nav">
-		<a href="#">/a/</a>
-		<a href="#">/b/</a>
-		<a href="#">/$/</a>
-	</div>
 	<div class="container">
 		<div class="main">
 			<h2>Sakura engine</h2>
